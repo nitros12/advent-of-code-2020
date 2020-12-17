@@ -1,0 +1,16 @@
+[package]
+name = "day17"
+version = "0.1.0"
+authors = ["Ben Simms <ben@bensimms.moe>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.release]
+opt-level = 3
+lto = 'fat'
+codegen-units = 1
+
+[dependencies]
+arrayfire = "3.7.2"
+rustacuda = "0.1.2"
