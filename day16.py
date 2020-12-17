@@ -47,8 +47,8 @@ def part2_z3(rules, my, others):
     for i, col in enumerate(cols):
         for (_, a_r, b_r), idx in zip(rules, idxs):
             c = all(x in a_r or x in b_r for x in col)
-            c = z3.If(idx == i, c, True)
-            s.add(c)
+            if not c:
+                s.add(idx != i)
 
     assert s.check() == z3.sat, "fuck"
 
