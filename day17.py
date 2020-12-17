@@ -43,13 +43,13 @@ class Bounds:
         )
 
     def x_range(self):
-        return range(self.x_l, self.x_u)
+        return range(self.x_l, self.x_u + 1)
 
     def y_range(self):
-        return range(self.y_l, self.y_u)
+        return range(self.y_l, self.y_u + 1)
 
     def z_range(self):
-        return range(self.z_l, self.z_u)
+        return range(self.z_l, self.z_u + 1)
 
 
 def vec_add(a, b):

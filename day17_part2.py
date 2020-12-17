@@ -15,6 +15,9 @@ class Bounds:
         self.w_l = w[0]
         self.w_u = w[1]
 
+    def __str__(self):
+        return f"({self.x_l}, {self.x_u}), ({self.y_l}, {self.y_u}), ({self.z_l}, {self.z_u}), ({self.w_l}, {self.w_u})"
+
     def expand(self, c):
         x, y, z, w = c
 
@@ -51,16 +54,16 @@ class Bounds:
         )
 
     def x_range(self):
-        return range(self.x_l, self.x_u)
+        return range(self.x_l, self.x_u + 1)
 
     def y_range(self):
-        return range(self.y_l, self.y_u)
+        return range(self.y_l, self.y_u + 1)
 
     def z_range(self):
-        return range(self.z_l, self.z_u)
+        return range(self.z_l, self.z_u + 1)
 
     def w_range(self):
-        return range(self.w_l, self.w_u)
+        return range(self.w_l, self.w_u + 1)
 
 
 def vec_add(a, b):
@@ -101,6 +104,7 @@ def part2(inp):
 
     for i in range(6):
         print(f"step = {i}\n")
+        print(bounds)
         # print_s(space, bounds)
         space, bounds = step(space, bounds)
 
