@@ -76,9 +76,9 @@ def read_integer() -> ParserFunction[int]:
         orig_view = view
         while True:
             (success, next_view, char) = view.next()
-            if not success:
+            if not success and not so_far:
                 return (False, orig_view, None)
-            if not char.isnumeric():
+            if char is None or not char.isnumeric():
                 if so_far:
                     return (True, view, int(''.join(so_far)))
                 return (False, view, None)

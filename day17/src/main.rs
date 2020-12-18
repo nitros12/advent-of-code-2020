@@ -27,7 +27,9 @@ fn main() {
     filt_n[3 * 3 + 3 + 1] = 100;
     let filt = arrayfire::Array::new(&filt_n, dim4!(3, 3, 3));
 
-    for i in 0..6 {
+    let start = std::time::Instant::now();
+
+    for _i in 0..6 {
         let r = convolve3(
             &a,
             &filt,
@@ -46,5 +48,7 @@ fn main() {
 
     let (n, _) = arrayfire::sum_all(&a);
 
-    println!("alive: {}", n);
+    let duration = start.elapsed();
+
+    println!("alive: {} ({:?})", n, duration);
 }
