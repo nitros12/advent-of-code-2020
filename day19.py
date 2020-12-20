@@ -1,4 +1,5 @@
 import regex
+import copy
 
 class CharRule:
     def __init__(self, n: int, c) -> None:
@@ -67,6 +68,30 @@ def part1(rules, inp):
     total = 0
 
     for line in inp:
+        ok, l = rule_zero.validate(line, rulemap)
+        print(ok, l, line)
+        if ok and (l == len(line)):
+            total += 1
+
+    return total
+
+def part2_bad(rules, inp):
+    rulemap = {r.n: r for r in rules}
+    rulemap[8] = RefRule(8, [[42], [42, 8]])
+    rulemap[11] = RefRule(11, [[42, 31], [42, 11, 31]])
+    last_rule = max(rulemap.keys())
+    rulemap[last_rule + 1] = CharRule(last_rule + 1, "z")
+    rule_zero = copy.copy(rulemap[0])
+    
+    for seq in rule_zero.rules:
+        seq.append(last_rule + 1)
+
+    rulemap[0] = rule_zero
+
+    total = 0
+
+    for line in inp:
+        line = line + "z"
         ok, l = rule_zero.validate(line, rulemap)
         print(ok, l, line)
         if ok and (l == len(line)):
