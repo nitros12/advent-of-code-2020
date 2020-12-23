@@ -29,13 +29,13 @@ def part2(inp: List[int]):
     min_cup = min(inp)
     max_cup = max(inp)
     cups = inp + list(range(max_cup + 1, 1000000 + 1))
-    map = {a: b for a, b in zip(cups, cups[1:])}
+    map = [0] * (len(cups) + 1)
+    for a, b in zip(cups, cups[1:]):
+        map[a] = b
     map[cups[-1]] = cups[0]
     current = cups[0]
 
-    for i in range(10000000):
-        if i % 10000 == 0:
-            print("tick ", i)
+    for _ in range(10000000):
         a = map[current]
         b = map[a]
         c = map[b]
